@@ -193,21 +193,32 @@
         </div>
       </div>
 
-      <!-- Segmented Navigation (No specificity clash with hover) -->
-      <nav class="flex items-center bg-[#EBE6DD] p-1 rounded-xl border border-[#DDD6C9]">
-        <button onclick="switchView('atlas', this)" class="nav-pill active px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-2">
-          <span class="font-mono opacity-60">01</span> Atlas, Facilities &amp; Vectors
+      <!-- Segmented Navigation & Instant PDF Download Action -->
+      <div class="flex items-center gap-3">
+        <nav class="flex items-center bg-[#EBE6DD] p-1 rounded-xl border border-[#DDD6C9]">
+          <button onclick="switchView('atlas', this)" class="nav-pill active px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-2">
+            <span class="font-mono opacity-60">01</span> Atlas, Facilities &amp; Vectors
+          </button>
+          <button onclick="switchView('telemetry', this)" class="nav-pill px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-2">
+            <span class="font-mono opacity-60">02</span> Telemetry &amp; Scheming Lab
+          </button>
+          <button onclick="switchView('statecraft', this)" class="nav-pill px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-2">
+            <span class="font-mono opacity-60">03</span> Statecraft &amp; Treaty Matrix
+          </button>
+          <button onclick="switchView('paper', this)" class="nav-pill px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-2">
+            <span class="font-mono opacity-60">04</span> Full Policy Brief (6 Pages)
+          </button>
+        </nav>
+
+        <!-- Direct PDF Download / Quick-Access Button for Judges -->
+        <button onclick="quickDownloadPDF()" title="Instantly view & export the complete 6-page ministerial policy brief as PDF" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0F172A] hover:bg-slate-800 text-white font-mono text-xs font-bold shadow-sm transition border border-slate-700 hover:border-amber-400 cursor-pointer">
+          <svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <span class="hidden sm:inline">PDF BRIEF (6P)</span>
+          <span class="sm:hidden">PDF</span>
         </button>
-        <button onclick="switchView('telemetry', this)" class="nav-pill px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-2">
-          <span class="font-mono opacity-60">02</span> Telemetry &amp; Scheming Lab
-        </button>
-        <button onclick="switchView('statecraft', this)" class="nav-pill px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-2">
-          <span class="font-mono opacity-60">03</span> Statecraft &amp; Treaty Matrix
-        </button>
-        <button onclick="switchView('paper', this)" class="nav-pill px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-2">
-          <span class="font-mono opacity-60">04</span> Full Policy Brief (6 Pages)
-        </button>
-      </nav>
+      </div>
     </div>
   </header>
 
@@ -1241,6 +1252,14 @@
 
       // Smooth scroll to top of viewport so user immediately sees new tab content
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function quickDownloadPDF() {
+      const paperTabBtn = document.querySelectorAll('.nav-pill')[3];
+      switchView('paper', paperTabBtn);
+      setTimeout(() => {
+        window.print();
+      }, 350);
     }
 
     function toggleContextRibbon() {
