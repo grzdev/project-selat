@@ -140,6 +140,39 @@
       box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03), 0 8px 24px -4px rgba(15, 23, 42, 0.04);
     }
 
+    /* Interactive Cartography Node Buttons */
+    .atlas-node-btn {
+      border: 1.5px solid rgba(71, 85, 105, 0.6);
+      background-color: rgba(15, 23, 42, 0.9);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+    .atlas-node-btn:hover {
+      border-color: rgba(148, 163, 184, 0.95);
+      background-color: rgba(30, 41, 59, 0.95);
+      transform: translateY(-2px);
+    }
+    .atlas-node-btn.active-node-0 {
+      border: 2px solid #3B82F6 !important;
+      background-color: rgba(30, 58, 138, 0.5) !important;
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.5), inset 0 0 10px rgba(59, 130, 246, 0.25) !important;
+    }
+    .atlas-node-btn.active-node-1 {
+      border: 2px solid #F59E0B !important;
+      background-color: rgba(120, 53, 15, 0.5) !important;
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.5), inset 0 0 10px rgba(245, 158, 11, 0.25) !important;
+    }
+    .atlas-node-btn.active-node-2 {
+      border: 2px solid #F43F5E !important;
+      background-color: rgba(136, 19, 55, 0.5) !important;
+      box-shadow: 0 0 20px rgba(244, 63, 94, 0.5), inset 0 0 10px rgba(244, 63, 94, 0.25) !important;
+    }
+    .atlas-node-btn.active-node-3 {
+      border: 2px solid #10B981 !important;
+      background-color: rgba(6, 78, 59, 0.5) !important;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.5), inset 0 0 10px rgba(16, 185, 129, 0.25) !important;
+    }
+
     @media print {
       .no-print { display: none !important; }
       body { background: #FFFFFF; color: #000000; }
@@ -348,7 +381,7 @@
               <line x1="502" y1="242" x2="532" y2="276" stroke="#10B981" stroke-width="3.5" />
 
               <!-- NODE 1: PENANG & KULIM OSAT HUB -->
-              <g class="cursor-pointer" onclick="selectAtlasNode(0)">
+              <g id="svg-node-0" class="cursor-pointer transition-all duration-300" onclick="selectAtlasNode(0)">
                 <circle cx="185" cy="68" r="18" fill="#3B82F6" opacity="0.25" class="pulse-circle" />
                 <circle cx="185" cy="68" r="8" fill="#3B82F6" stroke="#FFFFFF" stroke-width="2" />
                 <rect x="202" y="46" width="195" height="40" rx="6" fill="#0F172A" stroke="#3B82F6" stroke-width="1.2" />
@@ -357,7 +390,7 @@
               </g>
 
               <!-- NODE 2: KUALA LUMPUR / PUTRAJAYA -->
-              <g class="cursor-pointer" onclick="selectAtlasNode(1)">
+              <g id="svg-node-1" class="cursor-pointer transition-all duration-300" onclick="selectAtlasNode(1)">
                 <circle cx="310" cy="158" r="16" fill="#F59E0B" opacity="0.25" class="pulse-circle" />
                 <circle cx="310" cy="158" r="7.5" fill="#F59E0B" stroke="#FFFFFF" stroke-width="2" />
                 <rect x="105" y="142" width="192" height="40" rx="6" fill="#0F172A" stroke="#F59E0B" stroke-width="1.2" />
@@ -366,7 +399,7 @@
               </g>
 
               <!-- NODE 3: JOHOR SAFEGUARDED COMPUTE ZONE -->
-              <g class="cursor-pointer" onclick="selectAtlasNode(2)">
+              <g id="svg-node-2" class="cursor-pointer transition-all duration-300" onclick="selectAtlasNode(2)">
                 <circle cx="495" cy="235" r="22" fill="#F43F5E" opacity="0.3" class="pulse-circle" />
                 <circle cx="495" cy="235" r="9.5" fill="#F43F5E" stroke="#FFFFFF" stroke-width="2.5" />
                 <rect x="445" y="168" width="245" height="46" rx="6" fill="#0F172A" stroke="#F43F5E" stroke-width="1.5" />
@@ -375,7 +408,7 @@
               </g>
 
               <!-- NODE 4: SINGAPORE AISI & DARK-FIBER GATEWAY -->
-              <g class="cursor-pointer" onclick="selectAtlasNode(3)">
+              <g id="svg-node-3" class="cursor-pointer transition-all duration-300" onclick="selectAtlasNode(3)">
                 <circle cx="535" cy="282" r="16" fill="#10B981" opacity="0.25" class="pulse-circle" />
                 <circle cx="535" cy="282" r="7.5" fill="#10B981" stroke="#FFFFFF" stroke-width="2" />
                 <rect x="455" y="280" width="248" height="42" rx="6" fill="#0F172A" stroke="#10B981" stroke-width="1.2" />
@@ -384,24 +417,61 @@
               </g>
             </svg>
 
-            <!-- Bottom Map Legend Bar -->
-            <div class="grid grid-cols-4 gap-2 pt-3 border-t border-slate-800/80 text-xs font-mono">
-              <button onclick="selectAtlasNode(0)" class="text-left p-2 rounded bg-slate-900/90 hover:bg-slate-800 border border-slate-700 transition">
-                <span class="text-blue-400 block font-bold">NODE 01</span>
-                <span class="text-slate-300">Penang OSAT (13%)</span>
-              </button>
-              <button onclick="selectAtlasNode(1)" class="text-left p-2 rounded bg-slate-900/90 hover:bg-slate-800 border border-slate-700 transition">
-                <span class="text-amber-400 block font-bold">NODE 02</span>
-                <span class="text-slate-300">MITI Act 708 &amp; TNB</span>
-              </button>
-              <button onclick="selectAtlasNode(2)" class="text-left p-2 rounded bg-slate-900/90 hover:bg-slate-800 border border-rose-500/60 transition">
-                <span class="text-rose-400 block font-bold">NODE 03</span>
-                <span class="text-slate-300">Johor 3.24 GW Hubs</span>
-              </button>
-              <button onclick="selectAtlasNode(3)" class="text-left p-2 rounded bg-slate-900/90 hover:bg-slate-800 border border-slate-700 transition">
-                <span class="text-emerald-400 block font-bold">NODE 04</span>
-                <span class="text-slate-300">SG AISI Mutual Evals</span>
-              </button>
+            <!-- Tactical Node Switcher Bar -->
+            <div class="pt-3 border-t border-slate-800/80">
+              <div class="flex items-center justify-between text-[11px] font-mono text-slate-300 mb-2.5 px-0.5">
+                <span class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                  <span class="text-white font-bold uppercase tracking-wider">SELECT STRATEGIC NODE (CLICK TO INSPECT):</span>
+                </span>
+                <span class="text-slate-400 text-[10.5px]">4 Critical Corridor Choke Points</span>
+              </div>
+
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono" id="atlas-node-buttons">
+                <!-- Node 0 -->
+                <button id="node-btn-0" onclick="selectAtlasNode(0)" class="atlas-node-btn active-node-0 text-left p-2.5 rounded-lg transition-all cursor-pointer">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-blue-400 font-bold">NODE 01</span>
+                    <span id="node-badge-0" class="text-[9px] px-1.5 py-0.5 rounded bg-blue-500 text-white font-sans font-bold">● ACTIVE</span>
+                    <span id="node-prompt-0" class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 font-sans hidden">SELECT</span>
+                  </div>
+                  <span class="text-slate-100 block text-[11.5px] font-sans font-bold">Penang OSAT</span>
+                  <span class="text-slate-400 text-[10px] block font-mono">13% Packaging</span>
+                </button>
+
+                <!-- Node 1 -->
+                <button id="node-btn-1" onclick="selectAtlasNode(1)" class="atlas-node-btn text-left p-2.5 rounded-lg transition-all cursor-pointer">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-amber-400 font-bold">NODE 02</span>
+                    <span id="node-badge-1" class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500 text-slate-950 font-sans font-bold hidden">● ACTIVE</span>
+                    <span id="node-prompt-1" class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 font-sans">SELECT</span>
+                  </div>
+                  <span class="text-slate-100 block text-[11.5px] font-sans font-bold">MITI &amp; TNB</span>
+                  <span class="text-slate-400 text-[10px] block font-mono">Act 708 Command</span>
+                </button>
+
+                <!-- Node 2 -->
+                <button id="node-btn-2" onclick="selectAtlasNode(2)" class="atlas-node-btn text-left p-2.5 rounded-lg transition-all cursor-pointer">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-rose-400 font-bold">NODE 03</span>
+                    <span id="node-badge-2" class="text-[9px] px-1.5 py-0.5 rounded bg-rose-500 text-white font-sans font-bold hidden">● ACTIVE</span>
+                    <span id="node-prompt-2" class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 font-sans">SELECT</span>
+                  </div>
+                  <span class="text-slate-100 block text-[11.5px] font-sans font-bold">Johor Compute</span>
+                  <span class="text-slate-400 text-[10px] block font-mono">3.24 GW Hubs</span>
+                </button>
+
+                <!-- Node 3 -->
+                <button id="node-btn-3" onclick="selectAtlasNode(3)" class="atlas-node-btn text-left p-2.5 rounded-lg transition-all cursor-pointer">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-emerald-400 font-bold">NODE 04</span>
+                    <span id="node-badge-3" class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500 text-slate-950 font-sans font-bold hidden">● ACTIVE</span>
+                    <span id="node-prompt-3" class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 font-sans">SELECT</span>
+                  </div>
+                  <span class="text-slate-100 block text-[11.5px] font-sans font-bold">SG AISI Hub</span>
+                  <span class="text-slate-400 text-[10px] block font-mono">1.4ms Evals</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -732,7 +802,7 @@
             </div>
 
             <div class="mt-4 pt-4 border-t border-[#E2DDD5]">
-              <button onclick="executeCircuitBreaker()" class="w-full py-3 px-4 rounded-xl bg-crimson hover:bg-rose-800 text-white font-mono text-xs font-bold tracking-wide shadow-sm transition flex items-center justify-center gap-2">
+              <button id="circuit-breaker-btn" onclick="executeCircuitBreaker()" class="w-full py-3 px-4 rounded-xl bg-crimson hover:bg-rose-800 text-white font-mono text-xs font-bold tracking-wide shadow-sm transition flex items-center justify-center gap-2 cursor-pointer">
                 <span>TRIGGER ACT 708 SEC. 12 SUBSTATION THROTTLE (20% CAP)</span>
               </button>
               <span class="block text-center font-mono text-xs text-muted mt-1.5">
@@ -848,9 +918,18 @@
               </div>
             </div>
 
-            <div class="mt-4">
-              <button onclick="alert('Quarantine confirmed: Weights cryptographically locked in Johor enclave. MCMC transit gateway revoked.')" class="w-full py-2.5 px-3 rounded-lg bg-[#0F172A] hover:bg-slate-800 text-white font-mono text-xs font-bold transition flex items-center justify-center gap-2">
-                <span>ENFORCE CRYPTOGRAPHIC ESCROW LOCK</span>
+            <div class="mt-4 space-y-2">
+              <div id="escrow-status-toast" class="hidden p-2.5 rounded-lg bg-emerald-100 border border-emerald-300 text-emerald-900 font-mono text-[11px] leading-snug">
+                <div class="font-bold flex items-center gap-1.5 mb-0.5">
+                  <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+                  QUARANTINE CONFIRMED
+                </div>
+                Weights cryptographically locked in Johor Enclave #4. MCMC transit gateway revoked.
+              </div>
+
+              <button id="escrow-lock-btn" onclick="toggleEscrowLock()" class="w-full py-2.5 px-3 rounded-lg bg-[#0F172A] hover:bg-slate-800 text-white font-mono text-xs font-bold transition flex items-center justify-center gap-2 cursor-pointer shadow-sm">
+                <span id="escrow-btn-icon">🔒</span>
+                <span id="escrow-btn-text">ENFORCE CRYPTOGRAPHIC ESCROW LOCK</span>
               </button>
             </div>
           </div>
@@ -1356,6 +1435,44 @@
         </div>
       `).join('');
       document.getElementById('dossier-bullets').innerHTML = bulletsHtml;
+
+      // Update tactical buttons, active badges, prompts & SVG nodes
+      for (let i = 0; i < 4; i++) {
+        const btn = document.getElementById('node-btn-' + i);
+        const badge = document.getElementById('node-badge-' + i);
+        const prompt = document.getElementById('node-prompt-' + i);
+        const svgEl = document.getElementById('svg-node-' + i);
+
+        if (btn) {
+          btn.className = 'atlas-node-btn text-left p-2.5 rounded-lg transition-all cursor-pointer';
+          if (i === idx) {
+            btn.classList.add('active-node-' + i);
+          }
+        }
+        if (badge) {
+          if (i === idx) {
+            badge.classList.remove('hidden');
+          } else {
+            badge.classList.add('hidden');
+          }
+        }
+        if (prompt) {
+          if (i === idx) {
+            prompt.classList.add('hidden');
+          } else {
+            prompt.classList.remove('hidden');
+          }
+        }
+        if (svgEl) {
+          if (i === idx) {
+            svgEl.style.filter = 'drop-shadow(0 0 12px rgba(255, 255, 255, 0.85))';
+            svgEl.style.opacity = '1';
+          } else {
+            svgEl.style.filter = 'none';
+            svgEl.style.opacity = '0.7';
+          }
+        }
+      }
     }
 
     // =========================================================================
@@ -1541,6 +1658,12 @@
       activeTelemetryScenario = idx;
       circuitBreakerTripped = false;
 
+      const cbBtn = document.getElementById('circuit-breaker-btn');
+      if (cbBtn) {
+        cbBtn.className = "w-full py-3 px-4 rounded-xl bg-crimson hover:bg-rose-800 text-white font-mono text-xs font-bold tracking-wide shadow-sm transition flex items-center justify-center gap-2 cursor-pointer";
+        cbBtn.innerHTML = `<span>TRIGGER ACT 708 SEC. 12 SUBSTATION THROTTLE (20% CAP)</span>`;
+      }
+
       const btns = [
         document.getElementById('btn-scen-0'),
         document.getElementById('btn-scen-1'),
@@ -1637,16 +1760,96 @@
     }
 
     function executeCircuitBreaker() {
-      circuitBreakerTripped = true;
+      const btn = document.getElementById('circuit-breaker-btn');
       const pill = document.getElementById('scope-status-pill');
-      pill.className = "px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 border border-sky-500/40";
-      pill.textContent = "ENFORCEMENT ACTIVE: TNB SUBSTATION THROTTLED TO 48 MW (20% CAP)";
-      document.getElementById('scope-readout').textContent = "Active Draw: 48 MW (Capped) | MCMC Dark Fiber: SUSPENDED";
-      document.getElementById('layer1-headline').className = "font-bold text-sm text-cobalt mb-1";
-      document.getElementById('layer1-headline').textContent = "Throttled: 48 MW Maintenance Cap";
-      document.getElementById('audit-terminal').innerHTML += `
-        <div class="text-sky-400 font-bold pt-1 border-t border-slate-800">[ACTION EXECUTED] TNB Green Lane Clause 14.2 invoked: 275kV substation stepped down to 20% baseline; Johor–Singapore API gateway locked pending on-site NAIO inspection.</div>
-      `;
+      const readout = document.getElementById('scope-readout');
+      const l1h = document.getElementById('layer1-headline');
+      const term = document.getElementById('audit-terminal');
+
+      const now = new Date();
+      const timeStr = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
+
+      if (!circuitBreakerTripped) {
+        circuitBreakerTripped = true;
+        if (pill) {
+          pill.className = "px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 border border-sky-500/40";
+          pill.textContent = "ENFORCEMENT ACTIVE: TNB SUBSTATION THROTTLED TO 48 MW (20% CAP)";
+        }
+        if (readout) {
+          readout.textContent = "Active Draw: 48 MW (Capped) | MCMC Dark Fiber: SUSPENDED";
+        }
+        if (l1h) {
+          l1h.className = "font-bold text-sm text-cobalt mb-1";
+          l1h.textContent = "Throttled: 48 MW Maintenance Cap";
+        }
+        if (btn) {
+          btn.className = "w-full py-3 px-4 rounded-xl bg-sky-700 hover:bg-sky-600 text-white font-mono text-xs font-bold tracking-wide shadow-md transition flex items-center justify-center gap-2 cursor-pointer border border-sky-400";
+          btn.innerHTML = `<span>⚡ THROTTLE ACTIVE • CLICK TO RESTORE GRID (100%)</span>`;
+        }
+        if (term) {
+          term.innerHTML += `
+            <div class="text-sky-400 font-bold pt-1.5 border-t border-slate-800">[${timeStr}] [ACTION EXECUTED] TNB Green Lane Clause 14.2 invoked: 275kV substation stepped down to 20% baseline (48 MW); MCMC dark fiber gateway locked pending on-site NAIO inspection.</div>
+          `;
+          term.scrollTop = term.scrollHeight;
+        }
+      } else {
+        circuitBreakerTripped = false;
+        if (btn) {
+          btn.className = "w-full py-3 px-4 rounded-xl bg-crimson hover:bg-rose-800 text-white font-mono text-xs font-bold tracking-wide shadow-sm transition flex items-center justify-center gap-2 cursor-pointer";
+          btn.innerHTML = `<span>TRIGGER ACT 708 SEC. 12 SUBSTATION THROTTLE (20% CAP)</span>`;
+        }
+        if (term) {
+          term.innerHTML += `
+            <div class="text-emerald-400 font-bold pt-1.5 border-t border-slate-800">[${timeStr}] [GRID RESTORED] NAIO ministerial clearance verified; Sedenak-275kV substation resumed nominal operational capacity.</div>
+          `;
+          term.scrollTop = term.scrollHeight;
+        }
+        selectTelemetryScenario(activeTelemetryScenario);
+      }
+    }
+
+    let escrowLocked = false;
+    function toggleEscrowLock() {
+      const toast = document.getElementById('escrow-status-toast');
+      const btn = document.getElementById('escrow-lock-btn');
+      const btnText = document.getElementById('escrow-btn-text');
+      const btnIcon = document.getElementById('escrow-btn-icon');
+      const term = document.getElementById('audit-terminal');
+
+      const now = new Date();
+      const timeStr = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
+
+      if (!escrowLocked) {
+        escrowLocked = true;
+        if (toast) toast.classList.remove('hidden');
+        if (btn) {
+          btn.className = "w-full py-2.5 px-3 rounded-lg bg-rose-900 hover:bg-rose-800 text-white font-mono text-xs font-bold transition flex items-center justify-center gap-2 cursor-pointer shadow-md border border-rose-500";
+        }
+        if (btnIcon) btnIcon.textContent = "🔓";
+        if (btnText) btnText.textContent = "ESCROW ACTIVE • CLICK TO RELEASE QUARANTINE";
+
+        if (term) {
+          term.innerHTML += `
+            <div class="text-rose-400 font-bold pt-1.5 border-t border-slate-800">[${timeStr}] [ESCROW QUARANTINE] Weight hash for Checkpoint #FRONTIER-MY-RUN-04 locked in Johor Enclave #4. MCMC fiber routing suspended under Act 708 Schedule 4.</div>
+          `;
+          term.scrollTop = term.scrollHeight;
+        }
+      } else {
+        escrowLocked = false;
+        if (toast) toast.classList.add('hidden');
+        if (btn) {
+          btn.className = "w-full py-2.5 px-3 rounded-lg bg-[#0F172A] hover:bg-slate-800 text-white font-mono text-xs font-bold transition flex items-center justify-center gap-2 cursor-pointer shadow-sm";
+        }
+        if (btnIcon) btnIcon.textContent = "🔒";
+        if (btnText) btnText.textContent = "ENFORCE CRYPTOGRAPHIC ESCROW LOCK";
+
+        if (term) {
+          term.innerHTML += `
+            <div class="text-slate-300 font-semibold pt-1.5 border-t border-slate-800">[${timeStr}] [ESCROW RELEASED] Enclave release authorized following re-evaluation or container teardown.</div>
+          `;
+          term.scrollTop = term.scrollHeight;
+        }
+      }
     }
 
     function renderOscilloscope() {
@@ -1792,6 +1995,10 @@
       }
       recalcStatecraft();
     }
+
+    // Initialize components on page load
+    selectAtlasNode(0);
+    recalcStatecraft();
   </script>
 </body>
 </html>
