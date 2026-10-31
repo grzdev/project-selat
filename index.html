@@ -55,12 +55,26 @@
     }
 
     .nav-pill {
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      color: #475569 !important;
+      background-color: transparent !important;
+      transition: all 0.15s ease;
+      cursor: pointer;
     }
-    .nav-pill.active {
-      background-color: #0F172A;
-      color: #FAF8F5;
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.14);
+    .nav-pill:hover {
+      color: #0F172A !important;
+      background-color: rgba(15, 23, 42, 0.08) !important;
+    }
+    .nav-pill.active,
+    .nav-pill.active:hover,
+    .nav-pill.active:focus {
+      background-color: #0F172A !important;
+      color: #FAF8F5 !important;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.18);
+    }
+    .nav-pill.active span,
+    .nav-pill.active:hover span {
+      color: #FAF8F5 !important;
+      opacity: 0.8 !important;
     }
 
     input[type="range"].custom-slider {
@@ -150,10 +164,14 @@
           <span class="text-[9px] text-amber-400 font-normal">708</span>
         </div>
         <div>
-          <div class="flex items-center gap-2.5">
+          <div class="flex flex-wrap items-center gap-2.5">
             <span class="font-mono text-xs uppercase tracking-widest text-cobalt font-semibold">Project SELAT</span>
             <span class="text-slate-300">•</span>
             <span class="font-mono text-xs text-muted">Johor–Penang–Singapore Safeguards Architecture</span>
+            <span class="text-slate-300">•</span>
+            <span id="header-active-view" class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#EBE6DD] border border-[#DDD6C9] font-mono text-[11px] font-semibold text-slate-800">
+              <span class="w-1.5 h-1.5 rounded-full bg-cobalt"></span> VIEW: 01 ATLAS &amp; FACILITIES
+            </span>
           </div>
           <h1 class="text-lg font-bold tracking-tight text-ink leading-snug">
             The Strait Gatekeeper: Converting Middle-Power Infrastructure into Mandatory AI Verification
@@ -161,18 +179,18 @@
         </div>
       </div>
 
-      <!-- Segmented Navigation -->
+      <!-- Segmented Navigation (No specificity clash with hover) -->
       <nav class="flex items-center bg-[#EBE6DD] p-1 rounded-xl border border-[#DDD6C9]">
         <button onclick="switchView('atlas', this)" class="nav-pill active px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-2">
           <span class="font-mono opacity-60">01</span> Atlas, Facilities &amp; Vectors
         </button>
-        <button onclick="switchView('telemetry', this)" class="nav-pill px-3.5 py-2 rounded-lg text-xs font-semibold text-slate-700 hover:text-ink flex items-center gap-2">
+        <button onclick="switchView('telemetry', this)" class="nav-pill px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-2">
           <span class="font-mono opacity-60">02</span> Telemetry &amp; Scheming Lab
         </button>
-        <button onclick="switchView('statecraft', this)" class="nav-pill px-3.5 py-2 rounded-lg text-xs font-semibold text-slate-700 hover:text-ink flex items-center gap-2">
+        <button onclick="switchView('statecraft', this)" class="nav-pill px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-2">
           <span class="font-mono opacity-60">03</span> Statecraft &amp; Treaty Matrix
         </button>
-        <button onclick="switchView('paper', this)" class="nav-pill px-3.5 py-2 rounded-lg text-xs font-semibold text-slate-700 hover:text-ink flex items-center gap-2">
+        <button onclick="switchView('paper', this)" class="nav-pill px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-2">
           <span class="font-mono opacity-60">04</span> Full Policy Brief (6 Pages)
         </button>
       </nav>
@@ -180,45 +198,54 @@
   </header>
 
   <!-- Main Workspace -->
-  <main class="max-w-[1440px] w-full mx-auto px-6 py-8 flex-1">
+  <main class="max-w-[1440px] w-full mx-auto px-6 py-6 flex-1">
 
-    <!-- Executive Context Ribbon (Synthesizing middlepowers.ai + Ada Lovelace AISI + aisafety.sg) -->
-    <section class="no-print mb-8 card-elevated rounded-2xl p-6 border-l-4 border-l-cobalt">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-        <div class="lg:col-span-5">
-          <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-cobalt font-mono text-xs font-medium mb-2">
-            <span>CLOSING THE AISI ENFORCEMENT GAP</span>
+    <!-- ===================================================================== -->
+    <!-- VIEW 01: GEOPOLITICAL ATLAS, FACILITIES & ACCESS VECTORS              -->
+    <!-- ===================================================================== -->
+    <section id="view-atlas" class="tab-section active space-y-6">
+
+      <!-- Compact Collapsible Executive Context Ribbon (Tab 1 Only) -->
+      <div class="no-print card-elevated rounded-xl overflow-hidden border-l-4 border-l-cobalt">
+        <div class="p-3.5 bg-[#FAF8F5] border-b border-[#E2DDD5] flex items-center justify-between cursor-pointer select-none" onclick="toggleContextRibbon()">
+          <div class="flex items-center gap-3">
+            <span class="px-2 py-0.5 rounded-full bg-blue-50 border border-blue-200 text-cobalt font-mono text-[11px] font-bold">
+              STRATEGIC CONTEXT
+            </span>
+            <span class="text-xs font-bold text-ink">
+              Closing the AISI Enforcement Gap: Why Singapore’s AI Safety Science Needs Malaysia’s Physical Power Valve
+            </span>
           </div>
-          <h2 class="serif-display text-3xl sm:text-4xl text-ink leading-[1.12] font-normal">
-            Why Singapore’s AI Safety Science Needs Malaysia’s Physical Power Valve.
-          </h2>
+          <button id="ribbon-toggle-btn" class="font-mono text-xs text-muted hover:text-ink flex items-center gap-1.5 transition">
+            <span>Collapse Brief</span> <span id="ribbon-arrow" class="text-[10px]">▲</span>
+          </button>
         </div>
 
-        <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-4 border-t lg:border-t-0 lg:border-l border-[#E2DDD5] pt-4 lg:pt-0 lg:pl-6">
-          <div class="bg-[#FAF8F5] p-3.5 rounded-xl border border-[#E2DDD5]">
+        <div id="ribbon-body" class="p-4 grid grid-cols-1 md:grid-cols-3 gap-3 bg-white">
+          <div class="bg-[#FAF8F5] p-3 rounded-lg border border-[#E2DDD5]">
             <div class="flex items-center justify-between mb-1">
-              <span class="font-mono text-xs font-bold text-crimson">THE PROBLEM</span>
-              <span class="font-mono text-xs text-muted">Ada Lovelace AISI</span>
+              <span class="font-mono text-[11px] font-bold text-crimson">THE PROBLEM</span>
+              <span class="font-mono text-[11px] text-muted">Ada Lovelace AISI</span>
             </div>
             <p class="text-xs text-slate-700 leading-relaxed">
               National AISIs rely on <strong>voluntary testing agreements</strong>. Frontier labs can refuse pre-deployment access or bypass safety red lines when racing.
             </p>
           </div>
 
-          <div class="bg-[#FAF8F5] p-3.5 rounded-xl border border-[#E2DDD5]">
+          <div class="bg-[#FAF8F5] p-3 rounded-lg border border-[#E2DDD5]">
             <div class="flex items-center justify-between mb-1">
-              <span class="font-mono text-xs font-bold text-amber">THE CHOKE POINT</span>
-              <span class="font-mono text-xs text-muted">middlepowers.ai</span>
+              <span class="font-mono text-[11px] font-bold text-amber">THE CHOKE POINT</span>
+              <span class="font-mono text-[11px] text-muted">middlepowers.ai</span>
             </div>
             <p class="text-xs text-slate-700 leading-relaxed">
-              Singapore ran out of grid power (&lt;1.4 GW). So US &amp; Chinese giants are building <strong>3.24 GW of AI clusters 2 km away in Johor, Malaysia</strong> + <strong>13% of world chip packaging in Penang</strong>.
+              Singapore ran out of grid power (&lt;1.4 GW). So US &amp; Chinese giants are building <strong>3.24 GW of AI clusters in Johor, Malaysia</strong> + <strong>13% of world chip packaging in Penang</strong>.
             </p>
           </div>
 
-          <div class="bg-[#FAF8F5] p-3.5 rounded-xl border border-[#E2DDD5]">
+          <div class="bg-[#FAF8F5] p-3 rounded-lg border border-[#E2DDD5]">
             <div class="flex items-center justify-between mb-1">
-              <span class="font-mono text-xs font-bold text-emerald">THE SELAT SOLUTION</span>
-              <span class="font-mono text-xs text-muted">aisafety.sg + MITI</span>
+              <span class="font-mono text-[11px] font-bold text-emerald">THE SELAT SOLUTION</span>
+              <span class="font-mono text-[11px] text-muted">aisafety.sg + MITI</span>
             </div>
             <p class="text-xs text-slate-700 leading-relaxed">
               Bind Malaysia’s <strong>WMD Strategic Trade Act (Act 708)</strong> &amp; <strong>TNB 275kV grid fast-track</strong> to mandatory <strong>NAIO + Singapore AISI (Project Moonshot)</strong> red-line evaluations.
@@ -226,12 +253,6 @@
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- ===================================================================== -->
-    <!-- VIEW 01: GEOPOLITICAL ATLAS, FACILITIES & ACCESS VECTORS              -->
-    <!-- ===================================================================== -->
-    <section id="view-atlas" class="tab-section active space-y-8">
 
       <!-- Top Row: Interactive Strait Cartography + Live Node Inspector -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -425,8 +446,9 @@
             <span class="font-mono text-xs uppercase tracking-widest text-cobalt font-semibold block mb-1">
               Empirical Realism • Malaysian AI Infrastructure Master Registry
             </span>
-            <h3 class="serif-display text-2xl sm:text-3xl text-ink">
+            <h3 class="serif-display text-2xl sm:text-3xl text-ink flex items-center">
               Johor &amp; Penang AI Campuses Under Project SELAT Safeguards
+              <span id="facility-count-badge" class="font-mono text-xs text-muted ml-3 font-normal">(8 Strategic Facilities)</span>
             </h3>
           </div>
 
@@ -1178,17 +1200,48 @@
 
   <script>
     // =========================================================================
-    // NAVIGATION CONTROLLER
+    // NAVIGATION & VIEW CONTROLLER
     // =========================================================================
+    const viewMetadata = {
+      'atlas': { label: '01 ATLAS & FACILITIES', color: 'bg-cobalt' },
+      'telemetry': { label: '02 TELEMETRY & SCHEMING LAB', color: 'bg-emerald' },
+      'statecraft': { label: '03 STATECRAFT & TREATY MATRIX', color: 'bg-amber' },
+      'paper': { label: '04 POLICY BRIEF (6 PAGES)', color: 'bg-ink' }
+    };
+
     function switchView(viewId, btnEl) {
       document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
-      document.querySelectorAll('.nav-pill').forEach(b => {
-        b.classList.remove('active');
-        b.classList.add('text-slate-700');
-      });
-      document.getElementById('view-' + viewId).classList.add('active');
-      btnEl.classList.add('active');
-      btnEl.classList.remove('text-slate-700');
+      document.querySelectorAll('.nav-pill').forEach(b => b.classList.remove('active'));
+      
+      const targetView = document.getElementById('view-' + viewId);
+      if (targetView) targetView.classList.add('active');
+      if (btnEl) btnEl.classList.add('active');
+
+      const meta = viewMetadata[viewId];
+      const headerIndicator = document.getElementById('header-active-view');
+      if (meta && headerIndicator) {
+        headerIndicator.innerHTML = `
+          <span class="w-1.5 h-1.5 rounded-full ${meta.color}"></span> VIEW: ${meta.label}
+        `;
+      }
+
+      // Smooth scroll to top of viewport so user immediately sees new tab content
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleContextRibbon() {
+      const body = document.getElementById('ribbon-body');
+      const btn = document.getElementById('ribbon-toggle-btn');
+      const arrow = document.getElementById('ribbon-arrow');
+      if (body.classList.contains('hidden')) {
+        body.classList.remove('hidden');
+        arrow.textContent = '▲';
+        btn.querySelector('span').textContent = 'Collapse Brief';
+      } else {
+        body.classList.add('hidden');
+        arrow.textContent = '▼';
+        btn.querySelector('span').textContent = 'Expand Brief';
+      }
     }
 
     // =========================================================================
@@ -1353,6 +1406,10 @@
     function renderFacilities(category) {
       const tbody = document.getElementById('facility-table-body');
       const filtered = category === 'all' ? facilityData : facilityData.filter(f => f.category === category);
+      const countBadge = document.getElementById('facility-count-badge');
+      if (countBadge) {
+        countBadge.textContent = `(${filtered.length} of ${facilityData.length} Strategic Facilities)`;
+      }
       tbody.innerHTML = filtered.map(f => {
         const badgeColor = f.statusColor === 'emerald' ? 'bg-emerald-50 text-emerald border-emerald-200' :
                            f.statusColor === 'cobalt' ? 'bg-blue-50 text-cobalt border-blue-200' :
